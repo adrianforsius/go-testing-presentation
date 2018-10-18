@@ -1,40 +1,44 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"time"
 )
 
-type MyReader interface {
-	Read() (string, error)
+type Starter interface {
+	Start() (string, error)
 }
 
-type coolReader struct{}
+type Engine struct{}
 
-func (c coolReader) Read() (string, error) {
+func (e Engine) Start() (string, error) {
 	// Simulating reading of text
 	time.Sleep(500 * time.Millisecond)
-	return "cool entry", nil
+	return "wrooom", nil
 }
 
-type coolWriter struct {
-	Reader MyReader
+type Car struct {
+	Engine Starter
 }
 
-func (c coolWriter) Write(s string) (string, error) {
-	readText, err := c.Reader.Read()
-	return fmt.Sprintf("%s, coool I just read this %s", s, readText), err
+func (c Car) Drive(s string) (string, error) {
+	status, err := c.Engine.Start()
+	if s == "like I know PHP" {
+		return "", errors.New("not cool enough to drive")
+	}
+	return fmt.Sprintf("You want to drive %s? ..ok.. enjoy I just started the engine: %s", s, status), err
 }
 
 func main() {
-	text := "hello world"
-	writer := coolWriter{
-		Reader: coolReader{},
+	style := "like a boss"
+	car := Car{
+		Engine: Engine{},
 	}
-	_, err := writer.Write(text)
+	_, err := car.Drive(style)
 	if err != nil {
-		fmt.Printf("error %s", err)
+		fmt.Print(err)
 		os.Exit(1)
 	}
 	fmt.Print("Success\n")

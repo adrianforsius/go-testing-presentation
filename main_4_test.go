@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"testing"
+	"time"
 )
 
 // Integration test
-func TestSuccessMain(t *testing.T) {
+func TestSlowParallel(t *testing.T) {
 	testCases := []struct {
 		name   string
 		input  string
@@ -30,35 +30,10 @@ func TestSuccessMain(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			result, _ := car.Drive(tc.input)
+			// simulating slownes
+			time.Sleep(100 * time.Millisecond)
 			if result != tc.output {
 				t.Fatalf("test failed expected '%s' got '%s'", tc.output, result)
-			}
-		})
-	}
-}
-
-// Integration test
-func TestErrorMain(t *testing.T) {
-	testCases := []struct {
-		name   string
-		input  string
-		output string
-	}{
-		{
-			name:   "coolness fail",
-			input:  "like I know PHP",
-			output: "not cool enough to drive",
-		},
-	}
-
-	car := Car{
-		Engine: Engine{},
-	}
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			_, err := car.Drive(tc.input)
-			if fmt.Sprintf("%s", err) != tc.output {
-				t.Fatalf("test failed expected '%s' got '%v'", tc.output, err)
 			}
 		})
 	}
