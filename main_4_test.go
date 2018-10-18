@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Integration test
+// Show case a concurrent testing for slow tests
 func TestSlowParallel(t *testing.T) {
 	testCases := []struct {
 		name   string

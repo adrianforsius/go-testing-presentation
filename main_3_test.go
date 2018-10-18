@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+// Show case a slow connnection with the following test in main_4_test.go
+// this test is non-concurrent
 func TestSlow(t *testing.T) {
 	testCases := []struct {
 		input  string

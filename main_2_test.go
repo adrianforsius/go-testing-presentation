@@ -2,6 +2,7 @@ package main
 
 import "testing"
 
+// Show case how you can you test tables
 func TestWithTables(t *testing.T) {
 	testCases := []struct {
 		input  string

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// Integration test
+// A full show case testing success and failure in a concurrent manner
 func TestSuccessMain(t *testing.T) {
 	testCases := []struct {
 		name   string
@@ -37,7 +37,6 @@ func TestSuccessMain(t *testing.T) {
 	}
 }
 
-// Integration test
 func TestErrorMain(t *testing.T) {
 	testCases := []struct {
 		name   string

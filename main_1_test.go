@@ -2,6 +2,7 @@ package main
 
 import "testing"
 
+// A minimal stright forward test
 func TestDriveLikeMe(t *testing.T) {
 	input := "like me"
 	output := "You want to drive like me? ..ok.. enjoy I just started the engine: wrooom"
