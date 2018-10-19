@@ -7,10 +7,12 @@ import (
 	"time"
 )
 
+// Our simple app doesn't leverage interface but this allows mocking
 type Starter interface {
 	Start() (string, error)
 }
 
+// Implementor of starter
 type Engine struct{}
 
 func (e Engine) Start() (string, error) {
@@ -19,16 +21,18 @@ func (e Engine) Start() (string, error) {
 	return "wrooom", nil
 }
 
+// Our testable, our car has an engine (ideal to mock)
 type Car struct {
 	Engine Starter
 }
 
-func (c Car) Drive(s string) (string, error) {
+// Our testible function
+func (c Car) Drive(style string) (string, error) {
 	status, err := c.Engine.Start()
 	if s == "like I know PHP" {
 		return "", errors.New("not cool enough to drive")
 	}
-	return fmt.Sprintf("You want to drive %s? ..ok.. enjoy I just started the engine: %s", s, status), err
+	return fmt.Sprintf("You want to drive %s? ..ok.. enjoy I just started the engine: %s", style, status), err
 }
 
 func main() {
